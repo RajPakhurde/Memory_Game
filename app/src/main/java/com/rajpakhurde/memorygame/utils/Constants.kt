@@ -2,6 +2,7 @@ package com.rajpakhurde.memorygame.utils
 
 import com.rajpakhurde.memorygame.R
 
+const val EXTRA_BOARD_SIZE = "EXTRA_BOARD_SIZE"
 val DEFAULT_ICONS = listOf(
     R.drawable.ic_car,
     R.drawable.ic_face,
