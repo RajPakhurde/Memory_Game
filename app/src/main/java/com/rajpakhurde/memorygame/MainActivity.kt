@@ -5,11 +5,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -82,6 +84,9 @@ class MainActivity : AppCompatActivity() {
                 showCreationDialog()
                 return true
             }
+            R.id.mi_donwload -> {
+                showDownloadDialog()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -96,6 +101,16 @@ class MainActivity : AppCompatActivity() {
             downloadGame(customGameName)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showDownloadDialog() {
+        val boardDownloadView = LayoutInflater.from(this).inflate(R.layout.dialog_downlaod_board,null)
+        showAlertDialog("Fetch memory game",boardDownloadView,View.OnClickListener {
+            // Grab the text of the game name that the user wants to download
+            val etDownloadGame = boardDownloadView.findViewById<EditText>(R.id.etDownloadGame)
+            val gameToDownlaod = etDownloadGame.text.toString().trim()
+            downloadGame(gameToDownlaod)
+        })
     }
 
     private fun downloadGame(customGameName: String) {
@@ -115,6 +130,7 @@ class MainActivity : AppCompatActivity() {
             Log.e(TAG,"Execption occurs while downloading game",exception)
         }
     }
+
 
     private fun showCreationDialog(){
         val boardSizeView = LayoutInflater.from(this).inflate(R.layout.dialog_board_size,null)
